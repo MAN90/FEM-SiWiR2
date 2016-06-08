@@ -1,29 +1,15 @@
 #include "Vertex.hpp"
 
-
 /*
-Vertex::Vertex()
-{
-
-}
+This is the constructor and is used to set the values of the x and y coordinates for a vertex
 */
-
-
-Vertex::Vertex(const size_t & n, const real& xval, const real& yval)
+Vertex::Vertex(const real& xval, const real& yval)
 {
-	n_N_ = n;
 	x_ = xval;
 	y_ = yval;
 	
 }
 
-inline void Vertex::set_Vertex(const size_t & n, const real& xval, const real& yval)
-{
-	n_N_ = n;
-	x_ = xval;
-	y_ = yval;
-	
-}
 
 Vertex::~Vertex()
 {

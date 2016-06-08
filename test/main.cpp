@@ -4,7 +4,7 @@
 
 #include "ProblemFormulate.hpp"
 
-
+real delta; //global variable
 
 
 int main(int argc, char* argv[])
@@ -14,7 +14,8 @@ int main(int argc, char* argv[])
 		std::cout<<"Unsufficient number of input parameters"<<std::endl;
 	
 	
-	const real delta = std::stod(argv[1]);
+	delta = std::stod(argv[1]); //intializing the global variable
+	
 	const real eps = std::stod(argv[2]);	
 	
 	if(argc==4)
@@ -23,12 +24,18 @@ int main(int argc, char* argv[])
 		std::cout<<"delta : "<<delta<<"\t epsilon : "<<eps<<"\t refinement level :"<<reflvl<<std::endl;
 	}
   	else
-		std::cout<<"delta : "<<delta<<"\t epsilon : "<<eps<<std::endl;
+	{
+		//std::cout<<"delta : "<<delta<<"\t epsilon : "<<eps<<std::endl;
+	}
 
-
-	ProblemFormulate waveguide_;
-	waveguide_.setUpMesh(delta);
-
+	ProblemFormulate waveguide;
+	waveguide.setUpMesh();
+	waveguide.computeWriteKsq();
+	waveguide.resize_A_M();
+	waveguide.computeAssembleGlobalMatrices();
+	waveguide.writeGlobalAMatrix();
+	waveguide.writeGlobalMMatrix();
+	
 	return 0;
 }
 

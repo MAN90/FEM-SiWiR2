@@ -12,34 +12,21 @@
 class Mesh{
 
 	public:
-		void readInputFile();	//this function reads input from the file and initializes the nodes_ and elems_ data structures
-		void computeWriteKsq(); // computes and writes K-square to a file
-		void findNeighbours();		
-		void assemblyDriver(const char&);// takes the flag and does the assembly of that particular matrix
-
-	
-		real calcKsq(real ,real); // computes Ksq as reuired for Colsamm 
-		
-		void assembleGlobalA();
-		void assembleGlobalM();
-		void writeGlobalMatrix(std::vector<std::map<size_t,double>> & );
-		void computeLocalK(const size_t&); // here, the arguement is the element 	
-		
-
-		void setDelta(const real&); //setter function to set the value of Delta
-		std::vector<std::map<size_t,double>>& get_globalA();
-
+		void readInputFile();// to read input from the file and initialize the nodes_ and elems_
+		void findNeighbours();//to find the neighbours of each node				
+		size_t returnSizeNodes(); //to get the size of the nodes_ vector
+		size_t returnSizeElems(); //to get the size of the elems_ vector
+		real& returnXvertex(const size_t &); //to get the x-coordinate of a vertex 
+		real& returnYvertex(const size_t &); //to get the Y-coordinate of a vertex 
+		size_t returnN1element(const size_t &); //to get global number of 1st node of an element
+		size_t returnN2element(const size_t &); //to get global number of 2nd node of an element
+		size_t returnN3element(const size_t &); //to get global number of 3rd node of an element
 
 	private:
 		size_t n_N_Total_;
 		size_t n_E_Total_;
 		std::vector<Vertex> nodes_;
 		std::vector<Face> elems_;
-		real delta_; // it is better to make delta a data member of mesh class as it is required in calcKsq function, which is an input to Colsamm functions.
-		std::vector<std::map<size_t,double>> global_A_;		
-		
-
-
 };
 
 #endif

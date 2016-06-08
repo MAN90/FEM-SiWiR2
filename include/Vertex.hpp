@@ -14,20 +14,13 @@ typedef double real;
 class Vertex
 {
 	public:
-		//Vertex();		
-		Vertex(const size_t&, const real&, const real&);
+		Vertex(const real&, const real&); //constructor to intialize the vertex
 		~Vertex();
-		inline void set_Vertex(const size_t&, const real&, const real&);
-		//std::operator<<(std::ostream&, const Vertex&);
 			
-	
 	//private:
-		size_t n_N_;
-		real x_;
-		real y_;
-		real kSquare_;
-		std::set<size_t> neighbours_;
-		std::map<size_t,double> nodal_K_Matrix_;
+		real x_;// x-coordinate of the vertex 
+		real y_;// y-coordinate of the vertex
+		std::set<size_t> neighbours_;// data structure to store the global numbers of neighbouring nodes
 };
 
 
