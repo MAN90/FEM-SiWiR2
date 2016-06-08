@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -Winline -Wshadow   CMakeFiles/waveguide.dir/test/main.cpp.o CMakeFiles/waveguide.dir/src/ProblemFormulate.cpp.o CMakeFiles/waveguide.dir/src/Mesh.cpp.o CMakeFiles/waveguide.dir/src/Vertex.cpp.o CMakeFiles/waveguide.dir/src/Face.cpp.o  -o waveguide -rdynamic 
