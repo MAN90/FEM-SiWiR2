@@ -1,4 +1,5 @@
 #include "Solver.hpp"
+#include "EigenSolver.hpp"
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
     std::cout << "Sum ? 15: " << sum << std::endl;*/
     
     
-    std::vector<std::map<size_t, real> > m(4);
+    Mat m(4);
     m[0].insert(std::pair<size_t, real> (0,2));
     m[0].insert(std::pair<size_t, real> (1,-1));
     m[1].insert(std::pair<size_t, real> (0,-1));
@@ -36,14 +37,23 @@ int main()
     m[3].insert(std::pair<size_t, real> (2,-1));
     m[3].insert(std::pair<size_t, real> (3,2));
 
+    Mat n = m;
+    n[0][1]  = 5;
+    n[1][2] = 1.5;
+    //n[0].insert(std::pair<size_t, real> (0,8));
+    //n[0].insert(std::pair<size_t, real> (1,-7.));
+
     /*m[2].insert(std::pair<size_t, real> (0,2));
     m[2].insert(std::pair<size_t, real> (2,8));
     m[3].insert(std::pair<size_t, real> (0,7));
     m[3].insert(std::pair<size_t, real> (2,9));
     m[3].insert(std::pair<size_t, real> (3,1));*/
 
-    Matrix A(m);
-    A.display();
+
+
+    const real eps = 0.0001;
+    EigenSolver  eigen(m, n, eps);
+    eigen.inverseIteration();
     /*v2 = mat*v1;
     
     std::cout << "Matrix before:\n";
@@ -56,11 +66,11 @@ int main()
 //    std::cout << "norm? sqrt(5) " << norm << std::endl;
 
 
-    std::cout << "Before calling CG\n";
+    /*std::cout << "Before calling CG\n";
     x.display();
     x =  LSESolver::Solver<Matrix, Vector>::cgSolve(A,b,x,0.00001);
 
     std::cout << "After calling CG\n";
     x.display();
-
+    */
 }

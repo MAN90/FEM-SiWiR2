@@ -20,6 +20,7 @@ class Vector
 
 
     Vector(const size_t&, real=0);              // Constructor
+    Vector();
     ~Vector();                                 // Destructor
 
     Vector operator+ (const Vector& );

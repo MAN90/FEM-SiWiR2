@@ -23,7 +23,7 @@ include_directories( include_colsamm include)
 
 
 #Adding the sources using the set command
-set(SOURCES test/main.cpp src/ProblemFormulate.cpp src/Mesh.cpp src/Vertex.cpp src/Face.cpp src/Vector.cpp src/Matrix.cpp)   # No need for Solver.cpp
+set(SOURCES test/main.cpp src/ProblemFormulate.cpp src/Mesh.cpp src/Vertex.cpp src/Face.cpp src/Vector.cpp src/Matrix.cpp src/EigenSolver.cpp)   # No need for Solver.cpp
 
 #Setting the executable file
 add_executable(waveguide ${SOURCES})

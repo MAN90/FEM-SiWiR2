@@ -1,9 +1,14 @@
 #include "Vector.hpp"
 
-Vector::Vector(const size_t& size, real val)
+Vector::Vector(const size_t& size, real val)   // Constructor
 {
     //std::cout << "Vector constructed with size "<< size << " and value " << val << std::endl;
     this->vec_.resize(size, val);
+}
+
+Vector::Vector()     // Constructor
+{
+    std::cout << "Vector default c'tr called" << std::endl;
 }
 
 real Vector::operator* (const Vector& v)

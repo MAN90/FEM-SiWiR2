@@ -6,6 +6,12 @@ Matrix::Matrix(const Mat& m)
     this->mat_ = m;
 }
 
+
+Matrix::Matrix()     // Constructor
+{
+    std::cout << "Matrix default c'tr called" << std::endl;
+}
+
 Matrix::~Matrix()
 {
 
@@ -37,6 +43,19 @@ Vector Matrix::operator* (const Vector &v)
 
     return retVec;
 }
+
+
+void Matrix::operator= (const Matrix &m)
+{
+    //std::cout << "operator= (const Matrix &v) called\n";
+    size_t size = this->mat_.size();
+    assert(m.mat_.size() == size);
+    assert(size>0);
+
+    this->mat_ = m.mat_;
+
+}
+
 
 void Matrix::display()
 {

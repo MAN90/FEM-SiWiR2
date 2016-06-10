@@ -3,6 +3,7 @@
 #include<assert.h>
 
 #include "ProblemFormulate.hpp"
+#include "EigenSolver.hpp"
 
 real delta; //global variable
 
@@ -36,6 +37,9 @@ int main(int argc, char* argv[])
 	waveguide.writeGlobalAMatrix();
 	waveguide.writeGlobalMMatrix();
 	
+    EigenSolver  eigen(waveguide.getAMat(), waveguide.getMMat(), eps);
+    eigen.inverseIteration();
+
 	return 0;
 }
 

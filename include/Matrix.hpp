@@ -11,8 +11,10 @@ class Matrix
 
     ~Matrix();                  // Destructor
     Matrix(const Mat& );		// Copy Constructor
+    Matrix();
 
     Vector operator* (const Vector& v);
+    void operator= (const Matrix& );
     void display();
 
 };

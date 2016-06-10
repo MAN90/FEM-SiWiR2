@@ -56,6 +56,8 @@ namespace LSESolver {
     template <class MatrixType, class VectorType>
     VectorType&  Solver<MatrixType, VectorType> :: cgSolve(MatrixType& A, const VectorType& b, VectorType& x, const real& eps)
     {
+        std::cout << "Inside CG Solve\n";
+
         size_t len = A.mat_.size();
         assert(len == b.vec_.size() && b.vec_.size() == x.vec_.size());
         assert(eps>0.);
@@ -66,10 +68,18 @@ namespace LSESolver {
         real rho_k, t_k, beta_k;
         Vector r_k(len), d_k(len);
 
+        //std::cout << "b display\n";
+        //b.display();
         // Initialisation
         r_k = A*x - b;       //Initial Residual
         d_k = r_k*(-1);      //descent direction
 
+        //std::cout << "r_k display\n";
+         //r_k.display();
+       // bool isFirstTrue = (norm(r_k) > eps);
+       // bool isSecondTru = (k < numIter);
+
+       // std::cout << "isF " << isFirstTrue << " isSE " << isSecondTru  << std::endl;
         // Main loop of CG
         while ( norm(r_k) > eps && k < numIter)
         {
@@ -82,13 +92,15 @@ namespace LSESolver {
             d_k = -r_k + d_k*beta_k;
 
 
-            //std::cout << "k: " << k  <<"  residual is:  " << norm(r_k)<< "\nx is: \n";
+            std::cout << "k: " << k  <<"  residual is:  " << norm(r_k)<< "\nx is: \n";
             //x.display();
 
             //counter increment
             k += 1;
         }
 
+        //std::cout << "x after cg solve\n";
+        //x.display();
         return x;
     }
 
