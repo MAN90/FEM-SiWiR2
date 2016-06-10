@@ -1,3 +1,6 @@
+#ifndef VECTOR_HPP
+#define VECTOR_HPP
+
 #include <assert.h>
 #include <iostream>
 #include <vector>
@@ -19,11 +22,13 @@ class Vector
     Vector(const size_t&, real=0);              // Constructor
     ~Vector();                                 // Destructor
 
-
     Vector operator+ (const Vector& );
-    real operator* (const Vector& );
-    Vector operator* (const real& );
+    Vector operator- (const Vector& );
+    Vector operator- ();                 // v = -v
+    real operator* (const Vector& );    // Dot product of 2 vectors
+    Vector operator* (const real& );    // Multiplying vector with a scalar
     void operator= (const Vector& );
     void display();
-
 } ;
+
+#endif

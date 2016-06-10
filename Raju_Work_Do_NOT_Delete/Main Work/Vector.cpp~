@@ -2,7 +2,7 @@
 
 Vector::Vector(const size_t& size, real val)
 {
-    std::cout << "Vector constructed with size "<< size << " and value " << val << std::endl;
+    //std::cout << "Vector constructed with size "<< size << " and value " << val << std::endl;
     this->vec_.resize(size, val);
 }
 
@@ -49,7 +49,7 @@ Vector Vector::operator+ (const Vector &v)
     assert(v.vec_.size() == size);
     assert(size>0);
 
-    Vector temp(v.vec_.size());
+    Vector temp(size);
 
     for(size_t i=0; i<size; ++i)
     {
@@ -58,6 +58,40 @@ Vector Vector::operator+ (const Vector &v)
 
     return temp;
 
+}
+
+Vector Vector::operator- (const Vector &v)
+{
+    //std::cout << "operator- (const Vector &v) called\n";
+    size_t size = this->vec_.size();
+    assert(v.vec_.size() == size);
+    assert(size>0);
+
+    Vector temp(size);
+
+    for(size_t i=0; i<size; ++i)
+    {
+        temp.vec_[i] = (this->vec_[i] - v.vec_[i]);
+    }
+
+    return temp;
+
+}
+
+Vector Vector::operator- ()
+{
+    //std::cout << "operator-  called\n";
+    size_t size = this->vec_.size();
+    assert(size>0);
+
+    Vector temp(size);
+
+    for(size_t i=0; i<size; ++i)
+    {
+        temp.vec_[i] = -this->vec_[i];
+    }
+
+    return temp;
 }
 
 void Vector::operator= (const Vector &v)
@@ -73,14 +107,14 @@ void Vector::operator= (const Vector &v)
 
 void Vector::display()
 {
-    std::cout << "\nDisplay of vector\n";
+    std::cout << "Display of vector\n";
 
     for(size_t i=0; i< (this->vec_.size()); ++i)
     {
         std::cout << this->vec_[i] << "\t";
     }
 
-    std::cout << std::endl;
+    std::cout << "\n\n";
 
 }
 
