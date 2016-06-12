@@ -8,7 +8,7 @@ Vector::Vector(const size_t& size, real val)   // Constructor
 
 Vector::Vector()     // Constructor
 {
-    std::cout << "Vector default c'tr called" << std::endl;
+//    std::cout << "Vector default c'tr called" << std::endl;
 }
 
 real Vector::operator* (const Vector& v)

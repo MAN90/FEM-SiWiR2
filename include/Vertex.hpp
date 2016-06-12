@@ -1,15 +1,17 @@
 /*
 This class provides the facility to store the vertex number, x-y coordinates of grid point 
 */
+#ifndef Vertex_HPP
+#define Vertex_HPP
 
 #include <cstddef>
 #include<set>
 #include<map>
+//#include "Type.hpp"
 
 typedef double real;
 
-#ifndef Vertex_HPP 
-#define Vertex_HPP 
+
 
 class Vertex
 {

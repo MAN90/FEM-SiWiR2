@@ -9,7 +9,7 @@ Matrix::Matrix(const Mat& m)
 
 Matrix::Matrix()     // Constructor
 {
-    std::cout << "Matrix default c'tr called" << std::endl;
+//    std::cout << "Matrix default c'tr called" << std::endl;
 }
 
 Matrix::~Matrix()

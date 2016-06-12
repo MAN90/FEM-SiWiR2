@@ -56,7 +56,7 @@ namespace LSESolver {
     template <class MatrixType, class VectorType>
     VectorType&  Solver<MatrixType, VectorType> :: cgSolve(MatrixType& A, const VectorType& b, VectorType& x, const real& eps)
     {
-        std::cout << "Inside CG Solve\n";
+//        std::cout << "Inside CG Solve\n";
 
         size_t len = A.mat_.size();
         assert(len == b.vec_.size() && b.vec_.size() == x.vec_.size());
@@ -92,13 +92,14 @@ namespace LSESolver {
             d_k = -r_k + d_k*beta_k;
 
 
-            std::cout << "k: " << k  <<"  residual is:  " << norm(r_k)<< "\nx is: \n";
+//            std::cout << "k: " << k  <<"  residual is:  " << norm(r_k)<< "\nx is: \n";
             //x.display();
 
             //counter increment
             k += 1;
         }
 
+//        std::cout << "  residual is:  " << norm(r_k)<< std::endl;
         //std::cout << "x after cg solve\n";
         //x.display();
         return x;

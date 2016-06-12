@@ -13,6 +13,9 @@ class Mesh{
 
 	public:
 		void readInputFile();// to read input from the file and initialize the nodes_ and elems_
+		void refineMesh(const size_t&);// to refine the FE mesh acc to refinement level 
+		void writeRefinedMesh();// to write the refined nodes_ and elems_ info to file
+		int checkNodeExistence(const real&, const real&);// to check if given point exists in nodes_
 		void findNeighbours();//to find the neighbours of each node				
 		size_t returnSizeNodes(); //to get the size of the nodes_ vector
 		size_t returnSizeElems(); //to get the size of the elems_ vector

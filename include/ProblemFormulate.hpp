@@ -8,6 +8,7 @@
 
 extern real delta; //this is a global variable defined in the file main.cpp and intialied in th main() function
 
+extern int reflvl; //this is a global variable defined in the file main.cpp and intialied in th main() function
 
 class ProblemFormulate
 {
@@ -23,6 +24,7 @@ class ProblemFormulate
         void writeGlobalMMatrix(); // writes the Global M matrix to a text file
         Mat& getAMat();
         Mat& getMMat();
+        void writeEigenmode(const Vector&);
 
 
         ProblemFormulate(){;}

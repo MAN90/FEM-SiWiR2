@@ -2,21 +2,23 @@
 
 EigenSolver::EigenSolver(const Mat& A, const Mat& M, const real& eps)
 {
-    std::cout<< "EigenSolver constructor is called!" << std::endl;
+//    std::cout<< "EigenSolver constructor is called!" << std::endl;
 
     size_t size = A.size();
-    std::cout << "size of vector: " << size << std::endl;
+//    std::cout << "Size of input Vector: " << size << std::endl;
 
     this->A_.mat_ = A;
     this->M_.mat_ = M;
 
     //A_.display();
-    errorLimit_ = tol;
+    errorLimit_ = tol;     std::cout << "errorLimit: " << errorLimit_ << std::endl;
+
+
     eps_ = eps;
+    lambdaOld_ = 0.;
     lambda_ = 0.;
     factor_ = 1;
 
-    std::cout<<"Size of Vector is :  "<< size << std::endl;
     f_.vec_.resize(size, 0.0);
     u_h_.vec_.resize(size, 1.0);
 
@@ -29,7 +31,10 @@ void EigenSolver::inverseIteration()
      real norm, num, den;
      size_t len;
 
-    while(factor_ > errorLimit_ && ctr <2)
+     std::cout<<"Calculating Eigen value..... "<< std::endl;
+
+//    while(factor_ > errorLimit_ && ctr <5)
+     while(factor_ > errorLimit_)
     {
         if(ctr!=0)
         lambdaOld_ = lambda_;
@@ -43,7 +48,7 @@ void EigenSolver::inverseIteration()
         //f_.display();
 
         u_h_ = LSESolver::Solver<Matrix, Vector>::cgSolve(A_, f_, u_h_, eps_); // CG solver solved in Solver.hpp
-         std::cout << "u_h after solver\n";
+//         std::cout << "u_h after solver\n";
         //u_h_.display();
         norm = LSESolver::Solver<Matrix, Vector>::norm(u_h_); // norm function used from Solver.hpp
 
@@ -61,7 +66,8 @@ void EigenSolver::inverseIteration()
         den = u_h_ * (M_ * u_h_);
 
         lambda_ = num / den;
-
+//        std::cout<<std::setprecision(11)<<"lambdaOld is :"<< lambdaOld_ << std::endl;
+//        std::cout<<std::setprecision(11)<<"lambda is :"<< lambda_ << std::endl;
 
         if (ctr != 0)
             factor_ = std::fabs((lambda_-lambdaOld_)/lambdaOld_);
@@ -71,30 +77,23 @@ void EigenSolver::inverseIteration()
         //u_h_.display();
 
         ctr++;
+//        std::cout<<"factor is :"<< factor_ << std::endl;
+
 
     }
+     std::cout<<std::setprecision(11)<<"Eigen Value is : "<< lambda_ << std::endl;
 
 
 }
 
-void EigenSolver::writeEigenMode()
+
+Vector& EigenSolver::getEigenVector()
 {
-    std::ofstream  file_U_output;
-    file_U_output.open("eigenmode.txt");
-
-    std::cout<<"Writing Eigenmode to the text file"<<std::endl;
-
-    size_t len = A_.mat_.size();
-    for(size_t i=0; i<len; ++i)
-    {
-        file_U_output << i <<"\t" << u_h_.vec_[i];    // Incomplete --- y-axis missing
-    }
-
-    file_U_output.close();
+    return u_h_;
 }
 
 
 EigenSolver::~EigenSolver()
 {
- std::cout << "Destructor called\n"  ;
+// std::cout << "Destructor called\n"  ;
 }

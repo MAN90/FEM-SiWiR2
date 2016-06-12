@@ -2,14 +2,16 @@
 #define EIGENSOLVER_H
 
 #include "Solver.hpp"
-#include <fstream>
+#include "ProblemFormulate.hpp"
+#include <iomanip>
 
-#define tol 10^(-10)
+
+#define tol 1e-10
 
 class EigenSolver
 {
 private:
-    size_t lambda_,lambdaOld_;
+    real lambda_,lambdaOld_;
     real factor_,errorLimit_, eps_;
     Vector f_,u_h_;
     Matrix A_, M_;
@@ -20,7 +22,7 @@ public:
     ~EigenSolver();
 
     void inverseIteration();
-    void writeEigenMode();
+    Vector& getEigenVector();
 
 };
 

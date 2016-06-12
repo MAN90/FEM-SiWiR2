@@ -8,6 +8,8 @@
 
 #include "Colsamm.h"
 
+
+
 using namespace :: _COLSAMM_;
 
 /*
@@ -27,6 +29,14 @@ void ProblemFormulate::setUpMesh()
 {
     std::cout<<"Setting up the Finite Element Mesh"<<std::endl;
     FEMesh2D_.readInputFile();
+	
+	if(reflvl<=0)
+		std::cout<<"No refinement Requested"<<std::endl;
+
+	if(reflvl>0)
+		FEMesh2D_.refineMesh(reflvl);
+	
+
 }
 
 
@@ -70,6 +80,33 @@ void ProblemFormulate::computeWriteKsq()
 }
 
 /*
+this function writes the Eigenmode at each node to the file "eigenmode.txt"
+*/
+
+void ProblemFormulate::writeEigenmode(const Vector& vec)
+{
+    std::ofstream  file_output;
+    file_output.open("eigenmode.txt");
+    const size_t sizeNodes = FEMesh2D_.returnSizeNodes();
+
+    std::cout<<"Writing Eigenmode to the file"<<std::endl;
+
+    for(size_t i=0; i<sizeNodes; ++i)
+    {
+        real x = FEMesh2D_.returnXvertex(i);
+        real y = FEMesh2D_.returnYvertex(i);
+        file_output.width(8);
+        file_output<<std::left <<x
+                  <<"\t"<<std::left <<y
+                 <<"\t"<<std::left <<vec.vec_[i]<<"\n";
+    }
+
+    file_output.close();
+
+}
+
+
+/*
 This function resizes the data structures global_A_ and global_M_ to number of nodes in the mesh
 */
 void ProblemFormulate::resize_A_M()
@@ -86,7 +123,7 @@ This function computes the local Stiffness and Matrices matrices for each elemen
 void ProblemFormulate::computeAssembleGlobalMatrices()
 {
     const size_t sizeElems = FEMesh2D_.returnSizeElems();
-
+	
     for(size_t i =0; i<sizeElems; ++i)
     {
 
@@ -220,10 +257,10 @@ void ProblemFormulate::writeGlobalAMatrix()
     std::map<size_t,real>::iterator itr,itr_beg,itr_end;
 
 
-    /*###################################################################
-    ###############		Writing the A Matrix to file	#############
-    ###################################################################*/
-    std::cout<<"Writing The Global A Matrix to the file"<<std::endl;
+    /*######################################################################
+    ###############		Writing the Stiffness Matrix to file	#############
+    #######################################################################*/
+    std::cout<<"Writing the global Stiffness matrix to the file"<<std::endl;
 
     for(size_t i=0; i<sizeA; ++i)
     {
@@ -251,9 +288,9 @@ void ProblemFormulate::writeGlobalMMatrix()
 
 
     /*###################################################################
-    ###############		Writing the M Matrix to file	#############
+    ###############		Writing the Mass Matrix to file	#############
     ###################################################################*/
-    std::cout<<"Writing The Global M Matrix to the file"<<std::endl;
+    std::cout<<"Writing the global Mass matrix to the file"<<std::endl;
 
     for(size_t i=0; i<sizeM; ++i)
     {

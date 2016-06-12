@@ -6,7 +6,7 @@
 #include "EigenSolver.hpp"
 
 real delta; //global variable
-
+int reflvl;
 
 int main(int argc, char* argv[])
 {	
@@ -17,11 +17,12 @@ int main(int argc, char* argv[])
 	
 	delta = std::stod(argv[1]); //intializing the global variable
 	
-	const real eps = std::stod(argv[2]);	
+	const real eps = std::stod(argv[2]);
+	reflvl = -1;	
 	
 	if(argc==4)
 	{
-		const size_t reflvl = std::stoi(argv[3]);
+		reflvl = std::stoi(argv[3]);
 		std::cout<<"delta : "<<delta<<"\t epsilon : "<<eps<<"\t refinement level :"<<reflvl<<std::endl;
 	}
   	else
@@ -36,9 +37,11 @@ int main(int argc, char* argv[])
 	waveguide.computeAssembleGlobalMatrices();
 	waveguide.writeGlobalAMatrix();
 	waveguide.writeGlobalMMatrix();
-	
-    EigenSolver  eigen(waveguide.getAMat(), waveguide.getMMat(), eps);
-    eigen.inverseIteration();
+
+	EigenSolver  eigen(waveguide.getAMat(), waveguide.getMMat(), eps);
+	eigen.inverseIteration();
+
+    waveguide.writeEigenmode(eigen.getEigenVector());
 
 	return 0;
 }
